@@ -24,7 +24,7 @@ Manage services (create, update, delete).
 View all bookings made by customers.
 
 Technologies Used
-Backend: Laravel 11/12
+Backend: Laravel 12
 
 Authentication: Laravel Sanctum
 
@@ -164,8 +164,11 @@ POST /api/bookings: Make a booking for a service (User only)
 json
 {
   "service_id": 1,
+  
   "booking_date": "2025-07-30 10:00:00",
+  
   "start_date": "2025-08-01 14:00:00",
+  
   "end_date": "2025-08-05 12:00:00"
 }
 #### GET /api/bookings: View all bookings made by the authenticated user
@@ -200,7 +203,7 @@ GET /api/admin/bookings: View all bookings made by users
 
 
 ## Output/Testing Photo
-in testing photo Folder all the photo are stored
+in "testing photo" Folder all the photo are stored
 
 
 
