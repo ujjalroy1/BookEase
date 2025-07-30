@@ -7,55 +7,209 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## BookEase - Bus and Hotel Booking System
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+BookEase is a platform designed to facilitate the booking of buses and hotels. It allows users to register, log in, and manage bookings while providing administrators with the ability to manage services and view all bookings. This project was created by Ujjal Roy and implemented using Laravel 12.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Project Overview
+BookEase allows:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Users:
 
-## Learning Laravel
+Register and log in.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+View available services (bus or hotel).
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Book buses or hotels.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+View their own bookings.
 
-## Laravel Sponsors
+### Admins:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Manage services (create, update, delete).
 
-### Premium Partners
+View all bookings made by customers.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Technologies Used
+Backend: Laravel 11/12
 
-## Contributing
+Authentication: Laravel Sanctum
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Database: MySQL
 
-## Code of Conduct
+API: RESTful APIs
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Middleware: Custom AdminMiddleware middleware to manage admin access
 
-## Security Vulnerabilities
+Routing: Routes grouped by user type (admin, customer)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Security: Token-based authentication for secure access
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Installation & Setup
+
+Prerequisites
+
+PHP >= 8.1
+
+Composer (for dependency management)
+
+MySQL or any other relational database
+### Clone the Repository
+
+
+Clone the repository to your local machine:
+
+git clone https://github.com/ujjalroy1/BookEase.git
+
+
+### Install Dependencies
+Navigate to the project directory and install the required dependencies:
+
+cd BookEase
+composer install
+
+
+### Environment Configuration
+1.Copy the .env.example file to .env
+
+2.Update the .env file with your database credentials and other environment variables:
+
+DB_CONNECTION=mysql
+
+DB_HOST=127.0.0.1
+
+DB_PORT=3306
+
+DB_DATABASE=bookease
+
+DB_USERNAME=root
+
+DB_PASSWORD=
+
+
+3.Generate the application key:
+
+php artisan key:generate
+
+4.Run the migrations to create the necessary tables in the database:
+
+php artisan migrate
+
+5.You can  seed the database with some initial data (e.g., admin user, services) by running:
+
+php artisan db:seed
+
+## Serve the Application
+
+php artisan serve
+
+## API Documentation
+
+### POST /api/register: Register a new user
+
+### Request body:
+{
+  "name": "John Doe",
+  
+  "email": "johndoe@example.com",
+  
+  "password": "password",
+  
+  "password_confirmation": "password"
+  
+}
+
+
+### POST /api/login: Log in with existing user credentials
+
+### Request body:
+
+json
+{
+  "email": "johndoe@example.com",
+  
+  "password": "password"
+}
+
+
+#### Admin Routes
+Protected by auth:sanctum and admin middleware.
+
+POST /api/services: Create a new service (Admin only)
+
+### Request body:
+
+json
+{
+  "type": "Hotel",
+  
+  "name": "Grand Plaza",
+  
+  "description": "Luxury Hotel Stay",
+  
+  "price": 1000,
+  
+  "room": "20"
+}
+##### PUT /api/services/{id}: Update an existing service (Admin only)
+
+##### DELETE /api/services/{id}: Delete a service (Admin only)
+
+#### GET /api/admin/bookings: View all bookings (Admin only)
+
+
+### User Routes
+Protected by auth:sanctum middleware.
+
+GET /api/services: View all available services (User only)
+
+POST /api/bookings: Make a booking for a service (User only)
+
+### Request body:
+
+json
+{
+  "service_id": 1,
+  "booking_date": "2025-07-30 10:00:00",
+  "start_date": "2025-08-01 14:00:00",
+  "end_date": "2025-08-05 12:00:00"
+}
+#### GET /api/bookings: View all bookings made by the authenticated user
+
+
+## How to Test the API
+#### 1. Register a User
+Make a POST request to /api/register to register a new user.
+
+#### 2. Log In as User
+Make a POST request to /api/login with the user credentials to get a Bearer token.
+
+#### 3. Access User Routes
+Use the Bearer token to make requests to authenticated routes such as:
+
+GET /api/services: List available services
+
+POST /api/bookings: Book a service
+
+GET /api/bookings: View your bookings
+
+#### 4. Admin Routes
+Login as an admin user (where role = 1), and use the admin Bearer token to access:
+
+POST /api/services: Create a new service
+
+PUT /api/services/{id}: Update a service
+
+DELETE /api/services/{id}: Delete a service
+
+GET /api/admin/bookings: View all bookings made by users
+
+
+## Output/Testing Photo
+in testing photo Folder all the photo are stored
+
+
+
+
+
