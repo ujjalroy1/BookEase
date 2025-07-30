@@ -33,3 +33,9 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->group(function () {
 
 //this is for user
 Route::get('services', [ServiceController::class, 'index']);
+
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::post('bookings', [BookingController::class, 'store']);
+    Route::get('bookings', [BookingController::class, 'index']);
+});
