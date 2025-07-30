@@ -60,6 +60,7 @@ git clone https://github.com/ujjalroy1/BookEase.git
 Navigate to the project directory and install the required dependencies:
 
 cd BookEase
+
 composer install
 
 
