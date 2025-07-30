@@ -20,10 +20,17 @@ class Booking extends Model
 
     ];
 
-    public function user()
+// In Booking model
+public function user()
 {
     return $this->belongsTo(User::class);
 }
+
+public function service()
+{
+    return $this->belongsTo(Service::class);
+}
+
 
 
 }

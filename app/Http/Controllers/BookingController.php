@@ -35,6 +35,12 @@ class BookingController extends Controller
     {
         $bookings = Booking::where('user_id', Auth::id())->get();
         return response()->json($bookings);
-      
+    }
+    public function adminIndex()
+    {
+
+        $bookings = Booking::all();
+
+        return response()->json($bookings);
     }
 }

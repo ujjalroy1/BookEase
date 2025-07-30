@@ -17,25 +17,26 @@ Route::post('login', [UserAuthController::class, 'login']);
 
 
 
-
+// Route::get('admin/bookings', [BookingController::class, 'adminIndex']);
 
 //this is for admin
 Route::middleware(['auth:sanctum', AdminMiddleware::class])->group(function () {
     Route::post('services', [ServiceController::class, 'store']);
     Route::put('services/{id}', [ServiceController::class, 'update']);
     Route::delete('services/{id}', [ServiceController::class, 'destroy']);
+    Route::get('admin/bookings', [BookingController::class, 'adminIndex']);
 });
 
 
 
 
-
+Route::get('', [ServiceController::class, 'home']);
 
 //this is for user
-Route::get('services', [ServiceController::class, 'index']);
+
 
 Route::middleware('auth:sanctum')->group(function () {
-
+     Route::get('services', [ServiceController::class, 'index']);
     Route::post('bookings', [BookingController::class, 'store']);
     Route::get('bookings', [BookingController::class, 'index']);
 });
