@@ -104,9 +104,19 @@ php artisan serve
 
 ### Request body:
 {
-  "name": "John Doe",
+  "name": "Ujjal Roy",
   
-  "email": "johndoe@example.com",
+  "email": "ujjalroy1011@gmail.com",
+  
+  "phone": "1234567890",
+  
+  "address": "123 Main St, City, Country",
+  
+  "gender": "male",
+  
+  "age": 30,
+  
+  "role": 0, 
   
   "password": "password",
   
@@ -119,11 +129,11 @@ php artisan serve
 
 ### Request body:
 
-json
 {
-  "email": "johndoe@example.com",
+  "email":"ujjalroy1011@gmail.com",
   
-  "password": "password"
+  "password":"password"
+  
 }
 
 
@@ -172,6 +182,7 @@ json
   
   "end_date": "2025-08-05 12:00:00"
 }
+
 #### GET /api/bookings: View all bookings made by the authenticated user
 
 
