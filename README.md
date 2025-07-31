@@ -116,8 +116,6 @@ php artisan serve
   
   "age": 30,
   
-  "role": 0, 
-  
   "password": "password",
   
   "password_confirmation": "password"
